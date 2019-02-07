@@ -4,7 +4,7 @@ namespace App\HDP;
 
 use Illuminate\Http\Request;
 
-trait Soap
+trait Dev
 {
     public function call($parts,$type)
     {

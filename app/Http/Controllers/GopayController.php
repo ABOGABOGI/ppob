@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 
 class GopayController extends Controller
 {
+    use \App\HDP\Dev; public $url;
+    
     public function __construct()
     {
         $this->url = env('TO_GOPAY');

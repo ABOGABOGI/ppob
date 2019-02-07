@@ -5,7 +5,8 @@ use Illuminate\Http\Request;
 
 class GrabOvoController extends Controller
 {
-
+    use \App\HDP\Dev; public $url;
+    
     public function __construct()
     {
         $this->url = env('TO_GRAB_OVO');

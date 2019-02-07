@@ -5,10 +5,11 @@ use Illuminate\Http\Request;
 
 class EtollController extends Controller
 {
+    use \App\HDP\Dev; public $url;
 
     public function __construct()
     {
-        $this->url = env('TO_BPJSKES');
+        $this->url = env('TO_ETOLL');
     }
 
     public function terminal(Request $request)

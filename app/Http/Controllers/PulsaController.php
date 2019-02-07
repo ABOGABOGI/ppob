@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 
 class PulsaController extends Controller
 {
+    use \App\HDP\Dev; public $url;
     
     public function __construct()
     {

@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 
 class Controller extends BaseController
 {
-    use \App\HDP\Soap; public $url;
-
     private $responseCodes = [
         200 => 'Ok',
         204 => 'No Content',
