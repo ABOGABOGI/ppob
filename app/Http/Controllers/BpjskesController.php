@@ -30,6 +30,9 @@ class BpjskesController extends Controller
 
         $this->responseCode = 200;
         $this->results = $data;
+        $this->request = [
+            'get'=>$request->all()
+        ];
         return $this->response();
     }
     
