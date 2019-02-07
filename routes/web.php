@@ -30,7 +30,6 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->get('/vcgame', 'VoucherGameController@terminal');
         $router->get('/kai', 'KaiController@terminal');
         $router->get('/travel', 'TravelController@terminal');
-
-        $router->get('/bpjstk', 'BpjstkController@jobLocation');
+        $router->get('/bpjstk', 'BpjstkController@terminal');
     });
 });

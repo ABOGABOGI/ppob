@@ -15,12 +15,33 @@ class BpjstkController extends Controller
     public function terminal(Request $request)
     {
         switch ($request->action) {
-            
-            
+            case 'verify-ktp':
+                $data = $this->verifyKtp($request);
+                break;
+            case 'job-location':
+                $data = $this->jobLocation();
+                break;
+            case 'provinces':
+                $data = $this->provinces();
+                break;
+            case 'districts':
+                $data = $this->districts($request);
+                break;
+            case 'branch-offices':
+                $data = $this->branchOffices($request);
+                break;
+
             default:
-                return 404;
+                return abort(422, 'Need an Action parameter!');
                 break;
         }
+
+        $this->responseCode = 200;
+        $this->results = $data;
+        $this->request = [
+            'get'=>$request->all()
+        ];
+        return $this->response();
     }
 
     public function verifyKtp($request)
@@ -28,7 +49,7 @@ class BpjstkController extends Controller
         $parts = array(
             'nik' => $request->nik,
             'namaKtp' => $request->ktpName,
-            'tgLahir' => $request->birtDate,
+            'tgLahir' => $request->birthDate,
             'noPonsel' => $request->phone,
         
         );
@@ -39,6 +60,21 @@ class BpjstkController extends Controller
     public function jobLocation()
     {
         return $this->call([],'getLokasiKerja');
+    }
+
+    public function provinces()
+    {
+        return $this->call([],'getProvinsiList');
+    }
+
+    public function districts($request)
+    {
+        return $this->call(['kodeProvinsi' => $request->provinceCode],'getKabupaten');
+    }
+
+    public function branchOffices($request)
+    {
+        return $this->call(['kodeKabupaten' => $request->districtsCode],'getKantorCabang');
     }
 
     public function registration($request)
