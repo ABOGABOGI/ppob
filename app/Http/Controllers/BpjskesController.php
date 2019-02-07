@@ -40,8 +40,8 @@ class BpjskesController extends Controller
     {
         $this->validate($request,[
             'idPel'=>'required',
-            'monthCount'=>'required',
-            'phone'=>'required'
+            // 'monthCount'=>'required',
+            // 'phone'=>'required'
         ]);
 
         $parts = [
@@ -59,7 +59,7 @@ class BpjskesController extends Controller
 
         $this->validate($request,[
             'refId'=>'required',
-            'nominal'=>'required'
+            // 'nominal'=>'required'
         ]);
 
         $parts = [
