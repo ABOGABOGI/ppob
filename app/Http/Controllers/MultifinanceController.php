@@ -14,6 +14,9 @@ class MultifinanceController extends Controller
     public function terminal(Request $request)
     {
         switch ($request->action) {
+            case 'product-codes':
+                $data = $this->productCodes();
+                break;
             case 'inquiry':
                 $data = $this->inquiry($request);
                 break;
@@ -29,6 +32,17 @@ class MultifinanceController extends Controller
         $this->responseCode = 200;
         $this->results = $data;
         return $this->response();
+    }
+
+    public function productCodes()
+    {
+        return [
+            ['code'=>'FNFIF', 'name'=>'FIF Finance'],
+            ['code'=>'FNWOMD','name'=>'Wahana Ottomitra Multiartha Finance'],
+            ['code'=>'MEGAFIND','name'=>'Mega Finance'],
+            ['code'=>'FNCOLUMD','name'=>'Columbia Finance'],
+            ['code'=>'FNBAFD','name'=>'Bussan Auto Finance'] 
+        ];
     }
     
     public function inquiry($request)

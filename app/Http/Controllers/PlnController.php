@@ -14,6 +14,9 @@ class PlnController extends Controller
     public function terminal(Request $request)
     {
         switch ($request->action) {
+            case 'product-codes':
+                $data = $this->productCodes();
+                break;
             case 'inquiry':
                 $data = $this->inquiry($request);
                 break;
@@ -29,6 +32,15 @@ class PlnController extends Controller
         $this->responseCode = 200;
         $this->results = $data;
         return $this->response();
+    }
+
+    public function productCodes()
+    {
+        return [
+            ['code'=>'PLNNONTAGLISB','name'=>'PLN NON Tagihan Listrik'],
+            ['code'=>'PLNPOSTPAIDB','name'=>'PLN Postpaid'],
+            ['code'=>'PLNPREPAIDB','name'=>'PLN Prepaid'],
+        ];
     }
     
     public function inquiry($request)
