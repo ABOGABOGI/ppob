@@ -30,6 +30,34 @@ class BpjstkController extends Controller
             case 'branch-offices':
                 $data = $this->branchOffices($request);
                 break;
+            case 'registration':
+                $data = $this->registration($request);
+                break;
+            case 'pay-dues':
+                $data = $this->payDues($request);
+                break;
+            case 'inquiry-dues-by-nik':
+                $data = $this->inquiryDuesByNIK($request);
+                break;
+            case 'calculate-dues':
+                $data = $this->calculateDues($request);
+                break;
+            case 'inquiry-dues-code':
+                $data = $this->inquiryDuesCode($request);
+                break;
+            case 'inquiry-reprint':
+                $data = $this->inquiryReprint($request);
+                break;
+            case 'participantData':
+                $data = $this->participantData($request);
+                break;
+            case 'program-select':
+                $data = $this->programSelect($request);
+                break;
+            case 'mitra-info':
+                $data = $this->mitraInfo();
+                break;
+        
 
             default:
                 return abort(422, 'Need an Action parameter!');
@@ -44,12 +72,25 @@ class BpjstkController extends Controller
         return $this->response();
     }
 
+    public function mitraInfo()
+    {
+        return $this->call([],'mitraInfo');
+    }
+
     public function verifyKtp($request)
     {
+        
+        $this->validate($request,[
+            'nik'=>'required',
+            'ktpName'=>'required',
+            'birthDate'=>'required',
+            'phone'=>'required'
+        ]);
+
         $parts = array(
             'nik' => $request->nik,
             'namaKtp' => $request->ktpName,
-            'tgLahir' => $request->birthDate,
+            'tgLahir' => $this->formatDate($request->birthDate),
             'noPonsel' => $request->phone,
         
         );
@@ -69,22 +110,68 @@ class BpjstkController extends Controller
 
     public function districts($request)
     {
-        return $this->call(['kodeProvinsi' => $request->provinceCode],'getKabupaten');
+        $this->validate($request,[
+            'provinceCode'=>'required',
+        ]);
+
+        return $this->call([
+            'kodeProvinsi' => $request->provinceCode
+        ],'getKabupaten');
     }
 
     public function branchOffices($request)
     {
-        return $this->call(['kodeKabupaten' => $request->districtsCode],'getKantorCabang');
+        $this->validate($request,[
+            'districtCode'=>'required',
+        ]);
+
+        return $this->call([
+            'kodeKabupaten' => $request->districtCode
+        ],'getKantorCabang');
+    }
+
+    protected function formatDate($date)
+    {
+        $originalDate = $date;
+        return $newDate = date("d-m-Y", strtotime($originalDate));
     }
 
     public function registration($request)
     {
+        $this->validate($request,[
+            'nik'=>'required',
+            'ktpName'=>'required',
+            'expNik'=>'required',
+            'birthPlace'=>'required',
+            'birthDate'=>'required',
+            'city'=>'required',
+            'address'=>'required',
+            'subDistrict'=>'required',
+            'village'=>'required',
+            'postCode'=>'required',
+            'phone'=>'required',
+            // 'email'=>'required',
+            'JHT'=>'required|in:Y,N',
+            'JKK'=>'in:Y',
+            'JKM'=>'in:Y',
+            'periodeSelect'=>'required',
+            'income'=>'required',
+            'jobLocationCode'=>'required',
+            'workType'=>'required',
+            'startWorkingHours'=>'required',
+            'endWorkingHours'=>'required',
+            // 'notifySMS'=>'required',
+            'provinceCode'=>'required',
+            'districtCode'=>'required',
+            'branchOfficeCode'=>'required'	
+        ]);
+
         $parts = array(
             'nik' => $request->nik,
             'namaKtp' => $request->ktpName,
-            'expNik' => $request->expNik,
+            'expNik' => $this->formatDate($request->expNik),
             'tempatLahir' => $request->birthPlace,
-            'tgLahir' => $request->birthDate,
+            'tgLahir' => $this->formatDate($request->birthDate),
             'kotaDomisili' => $request->city,
             'alamat' => $request->address,
             'kecamatan' => $request->subDistrict,
@@ -97,27 +184,126 @@ class BpjstkController extends Controller
             'JKM' => $request->JKM,
             'periodeSelect' => $request->periodeSelect,
             'jmPenghasilan' => $request->income,
-            'lokasiPekerjaan' => $request->jobPlace,
+            'lokasiPekerjaan' => $request->jobLocationCode,
             'jenisPekerjaan' => $request->workType,
-            'jkStart' => $request->jkStart,
-            'jkStop' => $request->jkStop,
+            'jkStart' => $request->startWorkingHours,
+            'jkStop' => $request->endWorkingHours,
             'notifySMS' => $request->notifySMS,
-            'kodeProvKantor' => $request->provinceOfficeCode,
-            'kodeKabKantor' => $request->cityOfficeCode,
+            'kodeProvKantor' => $request->provinceCode,
+            'kodeKabKantor' => $request->districtCode,
             'kodeKantorCab' => $request->branchOfficeCode	
         );
         
         return $this->call(['data' => $parts],'registration');
     }
 
-    public function billCheck($request)
+    public function payDues($request)
     {
+        $this->validate($request,[
+            'duesCode'=>'required'
+        ]);
 
+        return $this->call([
+            'kodeIuran'=>$request->duesCode
+        ],'bayarIuran');
     }
 
-    public function billPayment($request)
+    public function inquiryDuesByNIK($request)
     {
+        $this->validate($request,[
+            'nik'=>'required'
+        ]);
+
+        return $this->call([
+            'nik'=>$request->nik
+        ],'inquiryKodeIuranByNIK');
+    }
+
+    public function calculateDues($request)
+    {
+        $this->validate($request,[
+            'income'=>'required',
+            'JHT'=>'required|in:Y,N',
+            'JKK'=>'in:Y',
+            'JKM'=>'in:Y',
+            'jobPlaceCode'=>'required',
+            'periodeSelect'=>'required',
+        ]);
+
+        $params = [ 
+            'jmPenghasilan' => $request->income,
+            'JHT' => $request->JHT,
+            'JKK' => $request->JKK,
+            'JKM' => $request->JKM,
+            'lokasiPekerjaan' => $request->jobPlaceCode,
+            'periodeSelect' => $request->periodeSelect
+        ];
         
+        return $this->call(['data'=>$params],'hitungIuran');
+    }
+
+    public function inquiryDuesCode($request)
+    {
+        $this->validate($request,[
+            'duesCode'=>'required'
+        ]);
+
+        return $this->call([
+            'kodeIuran'=>$request->duesCode
+        ],'inquiryKodeIuran');
+    }
+
+    public function inquiryReprint($request)
+    {
+        $this->validate($request,[
+            'duesCode'=>'required'
+        ]);
+
+        return $this->call([
+            'kodeIuran'=>$request->duesCode
+        ],'inquiryCetakUlang');
+    }
+
+    public function participantData($request)
+    {
+        $this->validate($request,[
+            'nik'=>'required'
+        ]);
+
+        return $this->call([
+            'nik'=>$request->nik
+        ],'getDataPeserta');
+    }
+
+    public function programSelect($request)
+    {
+        $this->validate($request,[
+            'nik'=>'required',
+            'income'=>'required',
+            'JHT'=>'required|in:Y,N',
+            'JKK'=>'in:Y',
+            'JKM'=>'in:Y',
+            'jobLocationCode'=>'required',
+            'periodeSelect'=>'required',
+            'workType'=>'required',
+            'startWorkingHours'=>'required',
+            'endWorkingHours'=>'required',
+        ]);
+
+        return $this->call([
+            'data'=>[
+                'nik' => $request->nik,
+                'JHT' => $request->JHT,
+                'JKK' => $request->JKK,
+                'JKM' => $request->JKM,
+                'lokasiPekerjaan' => $request->jobLocationCode,
+                'periodeSelect' => $request->periodeSelect,
+                'jmPenghasilan' => $request->income,
+                'jenisPekerjaan' => $request->workType,
+                'jkStart' => $request->startWorkingHours,
+                'jkStop' => $request->endWorkingHours,
+            ]
+        ],'pilihProgram');
     }
 
 }
