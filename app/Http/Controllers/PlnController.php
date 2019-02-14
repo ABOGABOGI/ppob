@@ -42,8 +42,8 @@ class PlnController extends Controller
     {
         return [
             ['code'=>'PLNNONTAGLISB','name'=>'PLN NON Tagihan Listrik'],
-            ['code'=>'PLNPOSTPAIDB','name'=>'PLN Postpaid'],
-            ['code'=>'PLNPREPAIDB','name'=>'PLN Prepaid'],
+            ['code'=>'PLNPOSTPAIDB','name'=>'Pasca Bayar'],
+            ['code'=>'PLNPREPAIDB','name'=>'Token'],
         ];
     }
     

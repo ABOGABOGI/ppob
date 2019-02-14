@@ -30,6 +30,10 @@ class BpjskesController extends Controller
                 break;
         }
 
+        if ($data['status']!==00) {
+            return abort(422, $data['msg']);
+        }
+
         $this->responseCode = 200;
         $this->results = $data;
         $this->request = [
@@ -41,7 +45,7 @@ class BpjskesController extends Controller
     public function inquiry($request)
     {
         $this->validate($request,[
-            'idPel'=>'required',
+            'idPel'=>'required|numeric',
             // 'monthCount'=>'required',
             // 'phone'=>'required'
         ]);
@@ -60,8 +64,8 @@ class BpjskesController extends Controller
     {
 
         $this->validate($request,[
-            'refId'=>'required',
-            // 'nominal'=>'required'
+            'refId'=>'required|numeric',
+            'nominal'=>'required|numeric'
         ]);
 
         $parts = [

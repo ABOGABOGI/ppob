@@ -53,15 +53,15 @@ class BpjstkController extends Controller
                 break;
             case 'program-select':
                 $data = $this->programSelect($request);
-                break;
-            case 'mitra-info':
-                $data = $this->mitraInfo();
-                break;
-        
+                break;        
 
             default:
                 return abort(422, 'Need an Action parameter!');
                 break;
+        }
+
+        if (isset($data['status']) and $data['status']!==00) {
+            return abort(422, $data['msg']);
         }
 
         $this->responseCode = 200;
@@ -72,19 +72,14 @@ class BpjstkController extends Controller
         return $this->response();
     }
 
-    public function mitraInfo()
-    {
-        return $this->call([],'mitraInfo');
-    }
-
     public function verifyKtp($request)
     {
         
         $this->validate($request,[
-            'nik'=>'required',
+            'nik'=>'required|numeric',
             'ktpName'=>'required',
-            'birthDate'=>'required',
-            'phone'=>'required'
+            'birthDate'=>'required|date_format:Y-m-d',
+            'phone'=>'required|numeric'
         ]);
 
         $parts = array(
@@ -111,7 +106,7 @@ class BpjstkController extends Controller
     public function districts($request)
     {
         $this->validate($request,[
-            'provinceCode'=>'required',
+            'provinceCode'=>'required|numeric',
         ]);
 
         return $this->call([
@@ -122,7 +117,7 @@ class BpjstkController extends Controller
     public function branchOffices($request)
     {
         $this->validate($request,[
-            'districtCode'=>'required',
+            'districtCode'=>'required|numeric',
         ]);
 
         return $this->call([
@@ -139,30 +134,30 @@ class BpjstkController extends Controller
     public function registration($request)
     {
         $this->validate($request,[
-            'nik'=>'required',
+            'nik'=>'required|numeric',
             'ktpName'=>'required',
-            'expNik'=>'required',
+            'expNik'=>'required|date_format:Y-m-d',
             'birthPlace'=>'required',
-            'birthDate'=>'required',
+            'birthDate'=>'required|date_format:Y-m-d',
             'city'=>'required',
             'address'=>'required',
             'subDistrict'=>'required',
             'village'=>'required',
-            'postCode'=>'required',
+            'postCode'=>'required|numeric',
             'phone'=>'required',
             // 'email'=>'required',
             'JHT'=>'required|in:Y,N',
             'JKK'=>'in:Y',
             'JKM'=>'in:Y',
-            'periodeSelect'=>'required',
-            'income'=>'required',
-            'jobLocationCode'=>'required',
+            'periodeSelect'=>'required|numeric',
+            'income'=>'required|numeric',
+            'jobLocationCode'=>'required|numeric',
             'workType'=>'required',
-            'startWorkingHours'=>'required',
-            'endWorkingHours'=>'required',
+            'startWorkingHours'=>'required|date_format:H:i',
+            'endWorkingHours'=>'required|date_format:H:i',
             // 'notifySMS'=>'required',
-            'provinceCode'=>'required',
-            'districtCode'=>'required',
+            'provinceCode'=>'required|numeric',
+            'districtCode'=>'required|numeric',
             'branchOfficeCode'=>'required'	
         ]);
 
@@ -211,7 +206,7 @@ class BpjstkController extends Controller
     public function inquiryDuesByNIK($request)
     {
         $this->validate($request,[
-            'nik'=>'required'
+            'nik'=>'required|numeric'
         ]);
 
         return $this->call([
