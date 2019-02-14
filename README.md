@@ -606,18 +606,245 @@ Code: `200`
 
 ## ETOLL
 
+**Endpoint** `GET`/api/v1/etoll
+
 #### INQUIRY
+
+**Params**
+
+| Key    | Type    | Require | Note                    |
+| ------ | ------- | :-----: | ----------------------- |
+| action | String  |    ✔    | Value must: **inquiry** |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": {
+            "category": "ETOLL",
+            "dataCount": 13,
+            "productList": [
+                {
+                    "productCode": "TOLBN10",
+                    "productDesc": "SALDO ETOLL BNI 10K",
+                    "productDenom": "10000",
+                    "productPrice": 11450
+                },
+                {
+                    "productCode": "TOLBN100",
+                    "productDesc": "SALDO ETOLL BNI 100K",
+                    "productDenom": "100000",
+                    "productPrice": 101550
+                },
+                {
+                    "productCode": "TOLBN20",
+                    "productDesc": "SALDO ETOLL BNI 20K",
+                    "productDenom": "20000",
+                    "productPrice": 21450
+                },
+                ........
+            }
+        }
+    }
+}
+```
+
 #### PAYMENT
+
+**Params**
+
+| Key     | Type    | Require | Note                             |
+| ------- | ------- | :-----: | -------------------------------- |
+| action  | String  |    ✔    | Value must: **payment**          |
+| productCode   | String |    ✔    | Get Product Code from Inquiry -> productList -> productCode |
+| idPel | Numeric |    ✔    |  |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": {
+            "responseCode": "00",
+            "message": "BERHASIL",
+            "idpel": "101000114217",
+            "voucher": "",
+            "ref": "952236503",
+            "trxID": "10107029"
+        }
+    }
+}
+```
 
 ## GOPAY
 
+**Endpoint** `GET`/api/v1/gopay
+
 #### INQUIRY
+
+**Params**
+
+| Key    | Type    | Require | Note                    |
+| ------ | ------- | :-----: | ----------------------- |
+| action | String  |    ✔    | Value must: **inquiry** |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": {
+            "category": "GOJEK",
+            "dataCount": 29,
+            "productList": [
+                {
+                    "productCode": "HGD100",
+                    "productDesc": "TopUp Driver Gojek 100.000",
+                    "productDenom": "100.000",
+                    "productPrice": 101800
+                },
+                {
+                    "productCode": "HGD150",
+                    "productDesc": "TopUp Driver Gojek 150.000",
+                    "productDenom": "150.000",
+                    "productPrice": 151800
+                },
+                {
+                    "productCode": "HGD20",
+                    "productDesc": "TopUp Driver Gojek 20.000",
+                    "productDenom": "20.000",
+                    "productPrice": 21800
+                },
+                ........
+            ]
+        }
+    }
+}
+```
+
 #### PAYMENT
+
+**Params**
+
+| Key     | Type    | Require | Note                             |
+| ------- | ------- | :-----: | -------------------------------- |
+| action  | String  |    ✔    | Value must: **payment**          |
+| productCode   | String |    ✔    | Get Product Code from Inquiry -> productList -> productCode |
+| idPel | Numeric |    ✔    |  |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": {
+            "responseCode": "00",
+            "message": "SUKSES - TEDDIE DIAN PATRIA 381521166274327",
+            "idpel": "101000114217",
+            "ref": "381521166274327",
+            "trxID": "10107120"
+        }
+    }
+}
+```
 
 ## GRAB OVO
 
+**Endpoint** `GET`/api/v1/grabovo
+
 #### INQUIRY
+
+**Params**
+
+| Key    | Type    | Require | Note                    |
+| ------ | ------- | :-----: | ----------------------- |
+| action | String  |    ✔    | Value must: **inquiry** |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": {
+            "category": "GRAB",
+            "dataCount": 8,
+            "productList": [
+                {
+                    "productCode": "GRAB100",
+                    "productDesc": "SALDO GRAB-OVO 100K",
+                    "productDenom": "",
+                    "productPrice": 101225
+                },
+                {
+                    "productCode": "GRAB150",
+                    "productDesc": "SALDO GRAB-OVO 150K",
+                    "productDenom": "",
+                    "productPrice": 151225
+                },
+                {
+                    "productCode": "GRAB20",
+                    "productDesc": "SALDO GRAB-OVO 20K",
+                    "productDenom": "",
+                    "productPrice": 20850
+                },
+                ........
+            ]
+        }
+    }
+}
+```
+
 #### PAYMENT
+
+**Params**
+
+| Key     | Type    | Require | Note                             |
+| ------- | ------- | :-----: | -------------------------------- |
+| action  | String  |    ✔    | Value must: **payment**          |
+| productCode   | String |    ✔    | Get Product Code from Inquiry -> productList -> productCode |
+| idPel | Numeric |    ✔    |  |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": {
+            "responseCode": "00",
+            "message": "BERHASIL",
+            "idpel": "08123456789",
+            "voucher": "Voucher Code =24768271, Voucher Password=49678-00905-86487-19636-76298",
+            "ref": "505264128",
+            "trxID": "10107195"
+        }
+    }
+}
+```
 
 ## KAI
 
@@ -628,38 +855,740 @@ Code: `200`
 
 ## MULTIFINANCE
 
+**Endpoint** `GET`/api/v1/multifinance
+
 #### PRODUCT CODE
+
+**Params**
+
+| Key     | Type    | Require | Note                             |
+| ------- | ------- | :-----: | -------------------------------- |
+| action  | String  |    ✔    | Value must: **product-codes**          |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": [
+            {
+                "code": "FNFIF",
+                "name": "FIF Finance"
+            },
+            {
+                "code": "FNWOMD",
+                "name": "Wahana Ottomitra Multiartha Finance"
+            },
+            {
+                "code": "MEGAFIND",
+                "name": "Mega Finance"
+            },
+            {
+                "code": "FNCOLUMD",
+                "name": "Columbia Finance"
+            },
+            {
+                "code": "FNBAFD",
+                "name": "Bussan Auto Finance"
+            }
+        ]
+    }
+}
+```
+
 #### INQUIRY
+
+**Params**
+
+| Key    | Type    | Require | Note                    |
+| ------ | ------- | :-----: | ----------------------- |
+| action | String  |    ✔    | Value must: **inquiry** |
+| productCode | String  |    ✔    | Get productCode from Product Code -> code |
+| idPel | Numeric |    ✔    |  |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": {
+        	"responseCode": "00",
+            "message": "",
+            "nomorKontrak": "101000114217",
+            "nama": "SURYANI NANI",
+            "angsuranKe": "005",
+            "totalAngsuran": "011",
+            "jatuhTempo": "02/07/2017",
+            "platform": "K",
+            "angsuran": "4025905",
+            "denda": "75000",
+            "biayaTagih": "0",
+            "admin": "2000",
+            "totalBayar": "4102905",
+            "fee": 2100,
+            "productCode": "FNFIF",
+            "refID": "17388233"
+        }
+    }
+}
+```
+
 #### PAYMENT
+
+**Params**
+
+| Key     | Type    | Require | Note                             |
+| ------- | ------- | :-----: | -------------------------------- |
+| action  | String  |    ✔    | Value must: **payment**          |
+| productCode | String |    ✔    |  Get productCode from Inquiry-> productCode |
+| refId | Numeric |    ✔    |  Get refId from Inquiry -> refID |
+| nominal | Numeric | ✔ |  Get nominal from Inquiry -> totalBayar |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": {
+            "responseCode": "00",
+            "message": "",
+            "nomorKontrak": "101000114217",
+            "nama": "SURYANI NANI",
+            "angsuranKe": "005",
+            "totalAngsuran": "011",
+            "jatuhTempo": "02/07/2017",
+            "platform": "K",
+            "noReferensi": "001394",
+            "angsuran": "4025905",
+            "denda": "75000",
+            "biayaTagih": "0",
+            "admin": "2000",
+            "totalBayar": "4102905",
+            "fee": 2100
+        }
+    }
+}
+```
 
 ## PDAM
 
+**Endpoint** `GET`/api/v1/pdam
+
 #### PRODUCT CODE
+
+**Params**
+
+| Key     | Type    | Require | Note                             |
+| ------- | ------- | :-----: | -------------------------------- |
+| action  | String  |    ✔    | Value must: **product-codes**          |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": [
+            {
+                "code": "PDAM400011",
+                "name": "PDAM KAB Banyumas"
+            },
+            {
+                "code": "PDAM400021",
+                "name": "PDAM Kabupaten Kebumen"
+            },
+            {
+                "code": "PDAM400051",
+                "name": "PDAM Kabupaten Cilacap"
+            },
+            .....
+        ]
+    }
+}
+```
+
 #### INQUIRY
+
+**Params**
+
+| Key    | Type    | Require | Note                    |
+| ------ | ------- | :-----: | ----------------------- |
+| action | String  |    ✔    | Value must: **inquiry** |
+| productCode | String  |    ✔    | Get productCode from Product Code -> code |
+| idPel | Numeric |    ✔    |  |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": {
+            "responseCode": "00",
+            "message": "",
+            "idpel": "0100031",
+            "nama": "SUKIMAN",
+            "jumlahTagihan": "1",
+            "reff": "",
+            "tagihan": [
+                {
+                    "periode": "JUL 2018",
+                    "pemakaian": 0,
+                    "meterAwal": 0,
+                    "meterAkhir": 0,
+                    "nilaiTagihan": 46500,
+                    "penalty": 0,
+                    "tagihanLain": 0,
+                    "admin": 2000,
+                    "total": 48500,
+                    "tarif": "",
+                    "alamat": "",
+                    "fee": 1100
+                }
+            ],
+            "totalTagihan": 48500,
+            "productCode": "PDAM400011",
+            "refID": "17388522"
+        }
+    }
+}
+```
+
 #### PAYMENT
+
+**Params**
+
+| Key     | Type    | Require | Note                             |
+| ------- | ------- | :-----: | -------------------------------- |
+| action  | String  |    ✔    | Value must: **payment**          |
+| productCode | String |    ✔    |  Get productCode from Inquiry-> productCode |
+| refId | Numeric |    ✔    |  Get refId from Inquiry -> refID |
+| nominal | Numeric | ✔ |  Get nominal from Inquiry -> totalTagihan |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": {
+            "responseCode": "00",
+            "message": "",
+            "idpel": "0100031             ",
+            "nama": "SUKIMAN",
+            "jumlahTagihan": "1",
+            "reff": "",
+            "tagihan": [
+                {
+                    "periode": "JUL 2018",
+                    "pemakaian": 14,
+                    "meterAwal": 1588,
+                    "meterAkhir": 1602,
+                    "nilaiTagihan": 46500,
+                    "penalty": 0,
+                    "tagihanLain": 0,
+                    "admin": 2000,
+                    "total": 48500,
+                    "tarif": "RUMAH TANGGA B1",
+                    "alamat": "JL. KOBER NO.25A PWT."
+                }
+            ],
+            "totalTagihan": 48500
+        }
+    }
+}
+```
+
 #### LOG
+
+**Params**
+
+| Key     | Type    | Require | Note                             |
+| ------- | ------- | :-----: | -------------------------------- |
+| action  | String  |    ✔    | Value must: **log**          |
+| refId | Numeric |    ✔    |  Get refId from Inquiry -> refID |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": {
+            "responseCode": "00",
+            "message": "",
+            "idpel": "0100031             ",
+            "nama": "SUKIMAN",
+            "jumlahTagihan": "1",
+            "reff": "",
+            "tagihan": [
+                {
+                    "periode": "JUL 2018",
+                    "pemakaian": 14,
+                    "meterAwal": 1588,
+                    "meterAkhir": 1602,
+                    "nilaiTagihan": 46500,
+                    "penalty": 0,
+                    "tagihanLain": 0,
+                    "admin": 2000,
+                    "total": 48500,
+                    "tarif": "RUMAH TANGGA B1",
+                    "alamat": "JL. KOBER NO.25A PWT."
+                }
+            ],
+            "totalTagihan": 48500
+        }
+    }
+}
+```
 
 ## PGN
 
+**Endpoint** `GET`/api/v1/pgn
+
 #### INQUIRY
+
+**Params**
+
+| Key    | Type    | Require | Note                    |
+| ------ | ------- | :-----: | ----------------------- |
+| action | String  |    ✔    | Value must: **inquiry** |
+| idPel | Numeric |    ✔    |  |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": {
+            "responseCode": "00",
+            "message": "sukses",
+            "idPel": "0110014679",
+            "nama": "NGATIMUN",
+            "alamat": "-",
+            "periode": "0917-1017",
+            "standAwal": "006538",
+            "standAkhir": "006573",
+            "pemakaian": "0000000035",
+            "ref": "55599-70237",
+            "tagihan": "322002",
+            "admin": "2500",
+            "totalTagihan": 324502,
+            "productCode": "PGN",
+            "refID": "17388821"
+        }
+    }
+}
+```
+
 #### PAYMENT
+
+**Params**
+
+| Key     | Type    | Require | Note                             |
+| ------- | ------- | :-----: | -------------------------------- |
+| action  | String  |    ✔    | Value must: **payment**          |
+| refId | Numeric |    ✔    |  Get refId from Inquiry -> refID |
+| nominal | Numeric | ✔ |  Get nominal from Inquiry -> totalTagihan |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": {
+            "responseCode": "00",
+            "message": "sukses",
+            "idPel": "0110014679",
+            "nama": "NGATIMUN",
+            "alamat": "-",
+            "periode": "0917-1017",
+            "standAwal": "006538",
+            "standAkhir": "006573",
+            "pemakaian": "0000000035",
+            "tagihan": "322002",
+            "admin": "2500",
+            "totalTagihan": 324502,
+            "ref": null,
+            "tglBayar": null
+        }
+    }
+}
+```
+
 #### LOG
+
+**Params**
+
+| Key     | Type    | Require | Note                             |
+| ------- | ------- | :-----: | -------------------------------- |
+| action  | String  |    ✔    | Value must: **log**          |
+| refId | Numeric |    ✔    |  Get refId from Inquiry -> refID |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": {
+            "responseCode": "00",
+            "message": "sukses",
+            "idPel": "0110014679",
+            "nama": "NGATIMUN",
+            "alamat": "-",
+            "periode": "0917-1017",
+            "standAwal": "006538",
+            "standAkhir": "006573",
+            "pemakaian": "0000000035",
+            "tagihan": "322002",
+            "admin": "2500",
+            "totalTagihan": 324502,
+            "ref": null,
+            "tglBayar": null
+        }
+    }
+}
+```
 
 ## PLN
 
+**Endpoint** `GET`/api/v1/pln
+
 #### PRODUCT CODE
+
+**Params**
+
+| Key     | Type    | Require | Note                             |
+| ------- | ------- | :-----: | -------------------------------- |
+| action  | String  |    ✔    | Value must: **product-codes**          |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": [
+            {
+                "code": "PLNNONTAGLISB",
+                "name": "PLN NON Tagihan Listrik"
+            },
+            {
+                "code": "PLNPOSTPAIDB",
+                "name": "Pasca Bayar"
+            },
+            {
+                "code": "PLNPREPAIDB",
+                "name": "Token"
+            }
+        ]
+    }
+}
+```
+
 #### INQUIRY
+
+**Params**
+
+| Key    | Type    | Require | Note                    |
+| ------ | ------- | :-----: | ----------------------- |
+| action | String  |    ✔    | Value must: **inquiry** |
+| productCode | String  |    ✔    | Get productCode from Product Code -> code |
+| idPel | Numeric |    ✔    |  |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": {
+            "responseCode": "00",
+            "message": "Successful",
+            "subscriberID": "530000000001",
+            "nama": "SUBCRIBER NAME",
+            "tarif": "R1",
+            "daya": "1300",
+            "lembarTagihanTotal": 1,
+            "lembarTagihan": "1",
+            "detilTagihan": [
+                {
+                    "periode": "201608",
+                    "nilaiTagihan": "300000",
+                    "denda": 0,
+                    "admin": 2500,
+                    "total": 302500
+                }
+            ],
+            "totalTagihan": 302500,
+            "productCode": "PLNPOSTPAIDB",
+            "refID": "17389175"
+        }
+    }
+}
+```
+
 #### PAYMENT
+
+**Params**
+
+| Key     | Type    | Require | Note                             |
+| ------- | ------- | :-----: | -------------------------------- |
+| action  | String  |    ✔    | Value must: **payment**          |
+| productCode | String |    ✔    | Get productCode from Inquiry-> productCode |
+| refId | Numeric |    ✔    | Get refId from Inquiry -> refID |
+| nominal | Numeric | ✔ | Get nominal from Inquiry: -> totalTagihan (nontalgis & postpaid), -> powerPurchaseDenom + -> data->admin (prepaid) |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": {
+            "responseCode": "00",
+            "message": "Successful",
+            "subscriberID": "530000000001",
+            "nama": "SUBCRIBER NAME",
+            "tarif": "R1",
+            "daya": "1300",
+            "lembarTagihanSisa": 0,
+            "lembarTagihan": "1",
+            "detilTagihan": [
+                {
+                    "meterAwal": "00080000",
+                    "meterAkhir": "00080000",
+                    "periode": "201608",
+                    "nilaiTagihan": "300000",
+                    "denda": 0,
+                    "admin": 2500,
+                    "total": 302500,
+                    "fee": 2400
+                }
+            ],
+            "totalTagihan": 302500,
+            "refnumber": "004212C9245F1BA43A77CEBD5CD5DA39",
+            "infoText": "RINCIAN TAGIHAN DAPAT DIAKSES DI www.pln.co.id ATAU PLN TERDEKAT"
+        }
+    }
+}
+```
+
 
 ## PULSA
 
+**Endpoint** `GET`/api/v1/pulsa
+
 #### INQUIRY
+
+**Params**
+
+| Key    | Type    | Require | Note                    |
+| ------ | ------- | :-----: | ----------------------- |
+| action | String  |    ✔    | Value must: **inquiry** |
+| phone | Numeric  |    ✔    |  |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": [
+                {
+                    "product_id": "P732287",
+                    "voucher": "SIMPATI",
+                    "nominal": "5.000",
+                    "price": 5475
+                },
+                {
+                    "product_id": "P612697",
+                    "voucher": "SIMPATI",
+                    "nominal": "10.000",
+                    "price": 10150
+                },
+                {
+                    "product_id": "P212980",
+                    "voucher": "SIMPATI",
+                    "nominal": "20.000",
+                    "price": 20000
+                },
+                ........
+            ]
+        }
+    }
+}
+```
+
 #### PAYMENT
+
+**Params**
+
+| Key     | Type    | Require | Note                             |
+| ------- | ------- | :-----: | -------------------------------- |
+| action  | String  |    ✔    | Value must: **payment**          |
+| phone   | Numeric |    ✔    |  |
+| product_id | String |    ✔    | Get product_id from Inquiry->product_id |
+| price | Numeric | ✔ | Get product_id from Inquiry->price |
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": {
+            "errCode": "00",
+            "status": "00",
+            "msg": "Sukses",
+            "msisdn": "081319404409",
+            "trxID": "DEVEL1550127600",
+            "price": 5475,
+            "VoucherSN": "1234567890987654321"
+        }
+    }
+}
+```
 
 ## TELKOM
 
+**Endpoint** `GET`/api/v1/telkom
+
 #### INQUIRY
+
+**Params**
+
+| Key    | Type    | Require | Note                    |
+| ------ | ------- | :-----: | ----------------------- |
+| action | String  |    ✔    | Value must: **inquiry** |
+| idPel | Numeric  |    ✔    |  |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": {
+            "responseCode": "00",
+            "message": "Approved",
+            "idpel": "0313282370",
+            "kodeArea": "0031",
+            "divre": "03",
+            "datel": "0002",
+            "nama": "KANTOR PELAYANAN BEA&CUKAI TIP",
+            "jumlahTagihan": "1",
+            "tagihan": [
+                {
+                    "periode": "NOV 2015",
+                    "nilaiTagihan": "68360",
+                    "admin": "2500",
+                    "total": 70860,
+                    "fee": 1700
+                }
+            ],
+            "totalTagihan": 70860,
+            "productCode": "TELKOMPSTN",
+            "refID": "17387531"
+        }
+    }
+}
+```
+
 #### PAYMENT
+
+**Params**
+
+| Key     | Type    | Require | Note                             |
+| ------- | ------- | :-----: | -------------------------------- |
+| action  | String  |    ✔    | Value must: **payment**          |
+| ref_id   | Numeric |    ✔    |  Get noniml from Inquiry -> refId |
+| nominal | Numeric |    ✔    |  Get noniml from Inquiry -> totalTagihan |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": {
+            "responseCode": "00",
+            "message": "Approved",
+            "idpel": "0313282370",
+            "kodeArea": "0031",
+            "divre": "03",
+            "datel": "0002",
+            "nama": "KANTOR PELAYANAN BEA&CUKAI TIP",
+            "jumlahTagihan": "1",
+            "tagihan": [
+                {
+                    "periode": "NOV 2015",
+                    "nilaiTagihan": "68360",
+                    "admin": "2500",
+                    "total": 70860
+                }
+            ],
+            "totalTagihan": 70860
+        }
+    }
+}
+```
 
 ## TRAVEL
 
@@ -674,6 +1603,108 @@ Code: `200`
 
 ## VOUCHER GAME
 
+**Endpoint** `GET`/api/v1/vcgame
+
 #### INQUIRY
+
+**Params**
+
+| Key    | Type    | Require | Note                    |
+| ------ | ------- | :-----: | ----------------------- |
+| action | String  |    ✔    | Value must: **inquiry** |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": [
+            {
+                "productID": "G502579",
+                "voucher": "AERIAPOINTS",
+                "nominal": "510 Points",
+                "harga": 65800
+            },
+            {
+                "productID": "G425387",
+                "voucher": "AERIAPOINTS",
+                "nominal": "2.100 Points",
+                "harga": 260800
+            },
+            {
+                "productID": "G874292",
+                "voucher": "AERIAPOINTS",
+                "nominal": "3.240 Points",
+                "harga": 386300
+            },
+            .....
+        ]
+    }
+}
+```
+
 #### PAYMENT
+
+**Params**
+
+| Key     | Type    | Require | Note                             |
+| ------- | ------- | :-----: | -------------------------------- |
+| action  | String  |    ✔    | Value must: **payment**          |
+| productId   | String |    ✔    |  Get noniml from Inquiry -> productId |
+| amount | Numeric |    ✔    |  Get noniml from Inquiry -> harga |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": {
+            "status": "00",
+            "errCode": "00",
+            "msg": "Sukses",
+            "uniqueID": "5c651454b8d17",
+            "msisdn": "0089527295650",
+            "price": 65800,
+            "trxID": "20120712816768",
+            "voucherCode": "Voucher Code=QV8TP-BDUQY-VGUOO-EZADS-36T4F,Serial Number=6114582131,"
+        }
+    }
+}
+```
+
 #### STATUS
+
+**Params**
+
+| Key     | Type    | Require | Note                             |
+| ------- | ------- | :-----: | -------------------------------- |
+| action  | String  |    ✔    | Value must: **status**          |
+| msisdn   | Numeric |    ✔    |  Get noniml from Payment -> msisdn |
+| trxId | Numeric |    ✔    |  Get noniml from Payment -> trxID |
+
+##### Success Response
+
+Code: `200`
+
+```json
+{
+    "code": 200,
+    "description": "Ok",
+    "response": {
+        "results": {
+            "status": "00",
+            "errCode": "00",
+            "transactionStatus": "SUCCESS",
+            "voucherCode": "Voucher Code=QV8TP-BDUQY-VGUOO-EZADS-36T4F,Serial Number=6114582131,"
+        }
+    }
+}
+```

@@ -50,7 +50,7 @@ class GopayController extends Controller
     {
         $this->validate($request,[
             'productCode'=>'required',
-            'idPel'=>'required'
+            'idPel'=>'required|numeric'
         ]);
         
         $parts = [

@@ -52,7 +52,7 @@ class PlnController extends Controller
 
         $this->validate($request,[
             'productCode'=>'required',
-            'idPel'=>'required'
+            'idPel'=>'required|numeric'
         ]);
 
         $parts = [
@@ -69,8 +69,8 @@ class PlnController extends Controller
     {
         $this->validate($request,[
             'productCode'=>'required',
-            'refId'=>'required',
-            'nominal'=>'required'
+            'refId'=>'required|numeric',
+            'nominal'=>'required|numeric'
         ]);
 
         $parts = [

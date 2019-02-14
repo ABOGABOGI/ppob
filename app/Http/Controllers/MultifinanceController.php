@@ -53,7 +53,7 @@ class MultifinanceController extends Controller
     {
         $this->validate($request,[
             'productCode'=>'required',
-            'idPel'=>'required',
+            'idPel'=>'required|numeric',
         ]);
 
         $parts = [
@@ -71,7 +71,7 @@ class MultifinanceController extends Controller
         $this->validate($request,[
             'productCode'=>'required',
             'refId'=>'required',
-            'nominal'=>'required',
+            'nominal'=>'required|numeric',
         ]);
 
         $parts = [

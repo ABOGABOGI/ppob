@@ -38,7 +38,7 @@ class PulsaController extends Controller
     public function inquiry($request)
     {
         $this->validate($request,[
-            'phone' => 'required'
+            'phone' => 'required|numeric'
         ]);
 
         $parts = [
@@ -52,8 +52,8 @@ class PulsaController extends Controller
     {
         $this->validate($request,[
             'product_id' => 'required',
-            'phone' => 'required',
-            'price' => 'required'
+            'phone' => 'required|numeric',
+            'price' => 'required|numeric'
         ]);
 
         $parts = [

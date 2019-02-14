@@ -127,7 +127,7 @@ class PdamController extends Controller
     {
         $this->validate($request,[
             'productCode'=>'required',
-            'idPel'=>'required'
+            'idPel'=>'required|numeric'
         ]);
 
         $parts = [
@@ -144,8 +144,8 @@ class PdamController extends Controller
     {
         $this->validate($request,[
             'productCode'=>'required',
-            'refId'=>'required',
-            'nominal'=>'required'
+            'refId'=>'required|numeric',
+            'nominal'=>'required|numeric'
         ]);
 
         $parts = [
@@ -160,7 +160,7 @@ class PdamController extends Controller
     public function log($request)
     {
         $this->validate($request,[
-            'refId'=>'required'
+            'refId'=>'required|numeric'
         ]);
 
         $parts = [

@@ -52,7 +52,7 @@ class VoucherGameController extends Controller
     {
         $this->validate($request,[
             'productId'=>'required',
-            'amount'=>'required',
+            'amount'=>'required|numeric',
         ]);
 
         $parts = [
@@ -67,8 +67,8 @@ class VoucherGameController extends Controller
     public function status($request)
     {
         $this->validate($request,[
-            'msisdn'=>'required',
-            'trxId'=>'required',
+            'msisdn'=>'required|numeric',
+            'trxId'=>'required|numeric',
         ]);
 
         $parts = [

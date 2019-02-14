@@ -57,8 +57,8 @@ class PgnController extends Controller
     public function payment($request)
     {
         $this->validate($request,[
-            'refId'=>'required',
-            'nominal'=>'required'
+            'refId'=>'required|numeric',
+            'nominal'=>'required|numeric'
         ]);
 
         $parts = [
@@ -73,7 +73,7 @@ class PgnController extends Controller
     public function log($request)
     {
         $this->validate($request,[
-            'refId'=>'required'
+            'refId'=>'required|numeric'
         ]);
         
         $parts = [
