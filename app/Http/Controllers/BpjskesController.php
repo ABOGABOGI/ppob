@@ -30,12 +30,20 @@ class BpjskesController extends Controller
                 break;
         }
 
-        if ($data['status']!==00) {
-            return abort(422, $data['msg']);
+        if (isset($data['responseCode'])) {
+            if ($data['responseCode'] !== '00') {
+                return abort(422, $data['message']);
+            }
+        }
+
+        if (isset($data['status'])) {
+            if ($data['status']!=='00') {
+                return abort(422, $data['msg'] );
+            }
         }
 
         $this->responseCode = 200;
-        $this->results = $data;
+        $this->results = (isset($data[0]))?$data:[$data];
         $this->request = [
             'get'=>$request->all()
         ];
