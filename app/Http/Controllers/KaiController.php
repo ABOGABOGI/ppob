@@ -54,6 +54,12 @@ class KaiController extends Controller
             }
         }
 
+        // if (isset($data['errCode'])) {
+        //     if ($data['errCode']!=="0") {
+        //         return abort(422, $data['msg'] );
+        //     }
+        // }
+
         $this->responseCode = 200;
         $this->results = (isset($data[0]))?$data:[$data];
         $this->request = [
